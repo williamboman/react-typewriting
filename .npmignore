@@ -1,0 +1,9 @@
+src/
+npm-debug.log
+yarn-error.log
+example.gif
+
+.babelrc
+.eslintrc.yml
+.gitignore
+.travis.yml
