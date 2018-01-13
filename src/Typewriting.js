@@ -47,7 +47,7 @@ class Typewriting extends PureComponent {
             currentTextIdx: 0,
             currentCharPos: 0,
             isDeleting: false,
-            inputProps: getInputProps(props),
+            componentProps: getComponentProps(props),
         }
     }
 
@@ -141,25 +141,25 @@ class Typewriting extends PureComponent {
         const {
             currentTextIdx,
             currentCharPos,
-            inputProps,
+            componentProps,
         } = this.state
 
         const currentText = strings[currentTextIdx]
         const text = currentText.slice(0, currentCharPos)
 
-        const componentProps = {
-            ...inputProps,
+        const _componentProps = {
+            ...componentProps,
             [this.props.stringPropName]: text,
         }
 
         if (typeof component === 'string') {
             return (
-                <component ref={this._registerRef} {...componentProps} />
+                <component ref={this._registerRef} {..._componentProps} />
             )
         } else {
             const Component = component
             return (
-                <Component ref={this._registerRef} {...componentProps} />
+                <Component ref={this._registerRef} {..._componentProps} />
             )
         }
     }
