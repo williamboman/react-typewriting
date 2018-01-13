@@ -1,6 +1,6 @@
 *React component for creating highly customizable typewriting visualizations*
 
-[![Build Status](https://travis-ci.org/williamboman/react-typewriting.svg?branch=gh-pages)](https://travis-ci.org/williamboman/react-typewriting/branches)
+[![Build Status](https://travis-ci.org/williamboman/react-typewriting.svg?branch=master)](https://travis-ci.org/williamboman/react-typewriting)
 
 ## Usage
 
