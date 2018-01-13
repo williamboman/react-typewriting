@@ -27,7 +27,7 @@ function Headline({text}) {
     component={Headline}
     strings={[
         'Lorem ipsum',
-            'dolor sit amet',
+        'dolor sit amet',
     ]}
 />
 ```
