@@ -1,4 +1,4 @@
-*React component for creating highly customizable typewriting visualizations*
+*React component for creating customizable typewriting visualizations*
 
 [![Build Status](https://travis-ci.org/williamboman/react-typewriting.svg?branch=master)](https://travis-ci.org/williamboman/react-typewriting)
 
