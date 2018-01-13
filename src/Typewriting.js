@@ -152,16 +152,10 @@ class Typewriting extends PureComponent {
             [this.props.stringPropName]: text,
         }
 
-        if (typeof component === 'string') {
-            return (
-                <component ref={this._registerRef} {..._componentProps} />
-            )
-        } else {
-            const Component = component
-            return (
-                <Component ref={this._registerRef} {..._componentProps} />
-            )
-        }
+        const Component = component
+        return (
+            <Component ref={this._registerRef} {..._componentProps} />
+        )
     }
 }
 
