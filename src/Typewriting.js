@@ -17,14 +17,42 @@ function getComponentProps({...props}) {
     return props
 }
 
+const SpeedTuple = (props, propName, componentName) => {
+    const prop = props[propName]
+    const isValid = (
+        Array.isArray(prop) &&
+        prop.length === 2 &&
+        typeof prop[0] === "number" && typeof prop[1] === "number"
+    )
+    if (!isValid) {
+        return new Error(
+            'Invalid prop `' + propName + '` supplied to' +
+            ' `' + componentName + '`. Expected a tuple of numbers.'
+        )
+    }
+}
+
+const NumberInterval = PropTypes.oneOfType([
+    PropTypes.number,
+    SpeedTuple,
+])
+
+const randomizeTimeout = (ms) => Array.isArray(ms) ? (
+    // random value inside the specified min and max thresholds
+    ms[0] + (Math.random() * (ms[1] - ms[0]))
+) : (
+    // randomize the value - with a minimum threshold
+    Math.max(Math.random() * ms, 30)
+)
+
 class Typewriting extends PureComponent {
 
     static propTypes = {
         strings: PropTypes.array.isRequired,
         stringPropName: PropTypes.string,
         waitBeforeDeleteMs: PropTypes.number,
-        writeSpeedMs: PropTypes.number,
-        deleteSpeedMs: PropTypes.number,
+        writeSpeedMs: NumberInterval,
+        deleteSpeedMs: NumberInterval,
         component: PropTypes.oneOfType([
             PropTypes.func,
             PropTypes.string,
@@ -47,7 +75,6 @@ class Typewriting extends PureComponent {
             currentTextIdx: 0,
             currentCharPos: 0,
             isDeleting: false,
-            componentProps: getComponentProps(props),
         }
     }
 
@@ -59,17 +86,6 @@ class Typewriting extends PureComponent {
         clearTimeout(this._ticker)
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            componentProps: getComponentProps(nextProps),
-        })
-    }
-
-    _randomizeTimeout(ms) {
-        // TODO: probably should implement a minimum timeout
-        return Math.random() * ms
-    }
-
     _queueTick(type) {
         const {
             writeSpeedMs,
@@ -79,8 +95,8 @@ class Typewriting extends PureComponent {
 
         const timeout =
             type === TICK_INIT ? 0 :
-            type === TICK_WRITE ? this._randomizeTimeout(writeSpeedMs) :
-            type === TICK_DELETE ? this._randomizeTimeout(deleteSpeedMs) :
+            type === TICK_WRITE ? randomizeTimeout(writeSpeedMs) :
+            type === TICK_DELETE ? randomizeTimeout(deleteSpeedMs) :
             type === START_DELETE ? waitBeforeDeleteMs :
             0 // ¯\_(ツ)_/¯
 
@@ -141,20 +157,19 @@ class Typewriting extends PureComponent {
         const {
             currentTextIdx,
             currentCharPos,
-            componentProps,
         } = this.state
 
         const currentText = strings[currentTextIdx]
         const text = currentText.slice(0, currentCharPos)
 
-        const _componentProps = {
-            ...componentProps,
+        const componentProps = {
+            ...getComponentProps(this.props),
             [this.props.stringPropName]: text,
         }
 
         const Component = component
         return (
-            <Component ref={this._registerRef} {..._componentProps} />
+            <Component ref={this._registerRef} {...componentProps} />
         )
     }
 }
