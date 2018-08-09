@@ -10,6 +10,7 @@
   "main": "dist/Typewriting.js",
   "scripts": {
     "build": "rm -rf dist/ && mkdir dist && babel src/Typewriting.js | umd -c Typewriting > dist/Typewriting.js",
+    "prepublish": "npm run build",
     "test": "eslint src/"
   },
   "keywords": [
