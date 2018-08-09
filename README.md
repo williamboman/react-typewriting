@@ -51,11 +51,15 @@ The strings to print out, in order of appearance.
 Amount of milliseconds strings will be fully readable before starting
 to delete the string.
 
-### `writeSpeedMs` | `number` | default: 100
+### `writeSpeedMs` | `number` | `[number, number]` | default: 100
 
-The absolute slowest speed to wait between printing characters (characters are printed at random intervals that span from 0 ms to whatever this config value is set to).
+This prop controls the speed at which the strings are built.
 
-### `deleteSpeedMs` | `number` | default: 60
+If provided a `number`, this number will be the longest time to wait between writing characters.
+
+If provided a `[number, number]` tuple, a number between these two values will be the longest time to wait between writing characters.
+
+### `deleteSpeedMs` | `number` | `[number, number]`| default: 60
 
 Same as `writeSpeedMs` (see above), but for when deleting characters.
 
