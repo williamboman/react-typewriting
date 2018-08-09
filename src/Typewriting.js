@@ -22,7 +22,7 @@ const SpeedTuple = (props, propName, componentName) => {
     const isValid = (
         Array.isArray(prop) &&
         prop.length === 2 &&
-        typeof prop[0] === "number" && typeof prop[1] === "number"
+        typeof prop[0] === 'number' && typeof prop[1] === 'number'
     )
     if (!isValid) {
         return new Error(
