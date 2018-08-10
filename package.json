@@ -12,7 +12,7 @@
   "scripts": {
     "build": "rm -rf lib/ && tsc --declaration --outDir lib",
     "prepublish": "npm run build",
-    "test": "eslint src/"
+    "test": "tsc --noEmit"
   },
   "keywords": [
     "react",
@@ -26,11 +26,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/react": "15.6.19",
-    "babel-eslint": "7.1.1",
-    "eslint": "3.16.1",
-    "eslint-plugin-react": "6.10.0",
-    "typescript": "3.0.1",
-    "umd": "3.0.1"
+    "typescript": "3.0.1"
   },
   "peerDependenies": {
     "react": ">=15"
