@@ -12,24 +12,11 @@ import Typewriting from 'react-typewriting'
         'Sign up today!',
         'Receive 20% off on your first purchase!',
     ]}
-/>
-```
-
-```jsx
-import Typewriting from 'react-typewriting'
-
-function Headline({text}) {
-    return <h1>{text}</h1>
-}
-
-<Typewriting
-    stringPropName='text'
-    component={Headline}
-    strings={[
-        'Lorem ipsum',
-        'dolor sit amet',
-    ]}
-/>
+>
+    {({ currentText }: { currentText: string }) => (
+        <h1>{currentText}</h1>
+    )}
+</Typewriting>
 ```
 
 ## Installation
@@ -45,6 +32,10 @@ $ yarn add react-typewriting
 ### `strings` | `Array<string>` | *required*
 
 The strings to print out, in order of appearance.
+
+### `children` | `({ currentText }: { currentText }) => ReactNode` | *required*
+
+The child render prop.
 
 ### `waitBeforeDeleteMs` | `number` | default: 9000
 
@@ -62,14 +53,6 @@ If provided a `[number, number]` tuple, a number between these two values will b
 ### `deleteSpeedMs` | `number` | `[number, number]`| default: 60
 
 Same as `writeSpeedMs` (see above), but for when deleting characters.
-
-### `component` | `Component | Function | string` | default: 'span'
-
-A `Component`, stateless function, or string corresponding to a default JSX element.
-
-### `stringPropName` | `string` | default: 'children'
-
-The prop to pass the current string value to.
 
 ## License
 
