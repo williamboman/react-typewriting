@@ -7,9 +7,10 @@
     "url": "https://github.com/williamboman/react-typewriting.git"
   },
   "description": "React component for creating highly customizable typewriting effects.",
-  "main": "dist/Typewriting.js",
+  "main": "lib/Typewriting.js",
+  "typings": "lib/Typewriting.d.ts",
   "scripts": {
-    "build": "rm -rf dist/ && mkdir dist && babel src/Typewriting.js | umd -c Typewriting > dist/Typewriting.js",
+    "build": "rm -rf lib/ && tsc --declaration --outDir lib",
     "prepublish": "npm run build",
     "test": "eslint src/"
   },
@@ -18,23 +19,20 @@
     "component",
     "typewriting",
     "typewriter",
-    "animation"
+    "animation",
+    "typescript"
   ],
   "author": "William Boman <william@redwill.se>",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "6.23.0",
+    "@types/react": "15.6.19",
     "babel-eslint": "7.1.1",
-    "babel-plugin-transform-class-properties": "6.23.0",
-    "babel-plugin-transform-object-rest-spread": "6.23.0",
-    "babel-preset-es2015": "6.22.0",
-    "babel-preset-react": "6.23.0",
     "eslint": "3.16.1",
     "eslint-plugin-react": "6.10.0",
+    "typescript": "3.0.1",
     "umd": "3.0.1"
   },
   "peerDependenies": {
-    "react": ">=0.14",
-    "prop-types": "~0.15"
+    "react": ">=15"
   }
 }
