@@ -7,10 +7,10 @@ enum Tick {
     START_DELETE,
 }
 
-enum Defaults {
-    WRITE_SPEED_MS = 100,
-    DELETE_SPEED_MS = 60,
-    WAIT_BEFORE_DELETE_MS = 9000,
+const DEFAULTS = {
+    WRITE_SPEED_MS: 100,
+    DELETE_SPEED_MS: 60,
+    WAIT_BEFORE_DELETE_MS: 9000,
 }
 
 type DelayNumber = number | [number, number]
@@ -66,9 +66,9 @@ export default class Typewriting extends React.PureComponent<Props, State> {
 
         const timeout =
             tickType === Tick.INIT ? 0 :
-            tickType === Tick.WRITE ? randomizeTimeout(writeSpeedMs != null ? writeSpeedMs : Defaults.WRITE_SPEED_MS) :
-            tickType === Tick.DELETE ? randomizeTimeout(deleteSpeedMs != null ? deleteSpeedMs : Defaults.DELETE_SPEED_MS) :
-            tickType === Tick.START_DELETE ? waitBeforeDeleteMs != null ? waitBeforeDeleteMs : Defaults.WAIT_BEFORE_DELETE_MS :
+            tickType === Tick.WRITE ? randomizeTimeout(writeSpeedMs != null ? writeSpeedMs : DEFAULTS.WRITE_SPEED_MS) :
+            tickType === Tick.DELETE ? randomizeTimeout(deleteSpeedMs != null ? deleteSpeedMs : DEFAULTS.DELETE_SPEED_MS) :
+            tickType === Tick.START_DELETE ? waitBeforeDeleteMs != null ? waitBeforeDeleteMs : DEFAULTS.WAIT_BEFORE_DELETE_MS :
             0 // ¯\_(ツ)_/¯
 
         this.tickTimeout = setTimeout(() => this.tick(), timeout)
