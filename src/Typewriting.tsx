@@ -133,6 +133,6 @@ export default class Typewriting extends React.PureComponent<Props, State> {
         const currentString = strings[currentStringIdx]
         const currentText = currentString.slice(0, currentCharPos)
 
-        return <>{this.props.children({ currentText })}</>
+        return this.props.children({ currentText }) as any
     }
 }
