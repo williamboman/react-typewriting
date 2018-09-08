@@ -4,8 +4,12 @@
 
 ## Usage
 
-```jsx
-import Typewriting from 'react-typewriting'
+```tsx
+import { Typewriting } from 'react-typewriting'
+
+interface TypewritingRenderArgs {
+    currentText: string
+}
 
 <Typewriting
     strings={[
@@ -13,7 +17,7 @@ import Typewriting from 'react-typewriting'
         'Receive 20% off on your first purchase!',
     ]}
 >
-    {({ currentText }: { currentText: string }) => (
+    {({ currentText }: TypewritingRenderArgs) => (
         <h1>{currentText}</h1>
     )}
 </Typewriting>

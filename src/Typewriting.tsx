@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import { randomizeTimeout, TimeoutRange } from "./utils"
+
 enum Tick {
     INIT,
     WRITE,
@@ -13,14 +15,12 @@ const DEFAULTS = {
     WAIT_BEFORE_DELETE_MS: 9000,
 }
 
-type DelayNumber = number | [number, number]
-
 interface Props {
     strings: string[]
-    waitBeforeDeleteMs?: DelayNumber
-    writeSpeedMs?: DelayNumber
-    deleteSpeedMs?: DelayNumber
-    children: ({ currentText }: { currentText: string }) => React.ReactNode
+    waitBeforeDeleteMs?: TimeoutRange
+    writeSpeedMs?: TimeoutRange
+    deleteSpeedMs?: TimeoutRange
+    children: ({ currentText }: { currentText: string }) => any
 }
 
 interface State {
@@ -29,13 +29,22 @@ interface State {
     isDeleting: boolean
 }
 
-const randomizeTimeout = (ms: DelayNumber): number => Array.isArray(ms) ? (
-    // random value inside the specified min and max thresholds
-    ms[0] + (Math.random() * (ms[1] - ms[0]))
-) : (
-    // randomize the value - with a minimum threshold
-    Math.max(Math.random() * ms, 30)
-)
+const moveToNextString = (prevState: State, props: Props): Pick<State, "isDeleting" | "currentCharPos" | "currentStringIdx"> => {
+    const nextStringIdx = prevState.currentStringIdx + 1
+    return {
+        isDeleting: false,
+        currentCharPos: 0,
+        currentStringIdx: nextStringIdx < props.strings.length ? nextStringIdx : 0
+    }
+}
+
+const moveCharPos = (change: number) => (prevState: State): Pick<State, "currentCharPos"> => ({
+    currentCharPos: prevState.currentCharPos + change
+})
+
+const startDeleting = (): Pick<State, "isDeleting"> => ({
+    isDeleting: true,
+})
 
 export default class Typewriting extends React.PureComponent<Props, State> {
 
@@ -74,51 +83,25 @@ export default class Typewriting extends React.PureComponent<Props, State> {
         this.tickTimeout = setTimeout(() => this.tick(), timeout)
     }
 
-    private moveToNextText() {
-        const { strings } = this.props
-        const { currentStringIdx } = this.state
-        const nextTextIdx = currentStringIdx + 1
-        this.setState({
-            isDeleting: false,
-            currentStringIdx: nextTextIdx < strings.length ? nextTextIdx : 0,
-            currentCharPos: 0,
-        })
-    }
-
     private tick() {
-        const { strings } = this.props
         const {
             currentStringIdx,
             currentCharPos,
             isDeleting,
         } = this.state
+        const currentText = this.props.strings[currentStringIdx]
 
-        const currentText = strings[currentStringIdx]
-
-        const nextCharPos = isDeleting
-            ? currentCharPos - 1
-            : currentCharPos + 1
-
-        if (isDeleting) {
-            if (nextCharPos < 0) {
-                this.moveToNextText()
+        if (!isDeleting) {
+            if (currentCharPos >= currentText.length) {
+                this.setState(startDeleting, () => this.queueTick(Tick.START_DELETE))
             } else {
-                this.setState({
-                    currentCharPos: nextCharPos,
-                })
+                this.setState(moveCharPos(1), () => this.queueTick(Tick.WRITE))
             }
-            this.queueTick(Tick.DELETE)
         } else {
-            if (nextCharPos > currentText.length) {
-                this.setState({
-                    isDeleting: true,
-                })
-                this.queueTick(Tick.START_DELETE)
+            if (currentCharPos <= 0) {
+                this.setState(moveToNextString, () => this.queueTick(Tick.WRITE))
             } else {
-                this.setState({
-                    currentCharPos: nextCharPos,
-                })
-                this.queueTick(Tick.WRITE)
+                this.setState(moveCharPos(-1), () => this.queueTick(Tick.DELETE))
             }
         }
     }
@@ -136,3 +119,5 @@ export default class Typewriting extends React.PureComponent<Props, State> {
         return this.props.children({ currentText }) as any
     }
 }
+
+export { Typewriting }

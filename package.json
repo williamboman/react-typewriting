@@ -12,7 +12,9 @@
   "scripts": {
     "build": "rm -rf lib/ && tsc --declaration --outDir lib",
     "prepublish": "npm run build",
-    "test": "tsc --noEmit"
+    "jest": "jest",
+    "test": "npm run ts-lint && npm run jest",
+    "ts-lint": "tsc --noEmit"
   },
   "keywords": [
     "react",
@@ -25,7 +27,14 @@
   "author": "William Boman <william@redwill.se>",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^23.3.2",
     "@types/react": "15.6.19",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "jest": "^23.5.0",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "ts-jest": "^23.1.4",
     "typescript": "3.0.1"
   },
   "peerDependenies": {
