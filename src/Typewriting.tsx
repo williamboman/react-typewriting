@@ -46,7 +46,7 @@ const startDeleting = (): Pick<State, "isDeleting"> => ({
     isDeleting: true,
 })
 
-export default class Typewriting extends React.PureComponent<Props, State> {
+export class Typewriting extends React.PureComponent<Props, State> {
 
     private tickTimeout: number | null = null
 
@@ -120,4 +120,5 @@ export default class Typewriting extends React.PureComponent<Props, State> {
     }
 }
 
-export { Typewriting }
+// for backwards compatibility
+export default Typewriting
