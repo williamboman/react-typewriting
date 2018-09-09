@@ -1,3 +1,8 @@
+## v2.1.1 (2018-09-09)
+
+- Exclude __tests__ directory from npm package.
+- Fix TS definition exports.
+
 ## v2.1.0 (2018-09-09)
 
 - Add tests.
