@@ -1,3 +1,8 @@
+## v2.1.0 (2018-09-09)
+
+- Add tests.
+- Refactor some code.
+
 ## v2.0.1 (2018-08-27)
 
 - Don't use React fragments to respect React v15 compatibility, as defined in `peerDependencies`.
