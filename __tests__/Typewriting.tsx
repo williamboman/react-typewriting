@@ -6,7 +6,7 @@ jest.useFakeTimers()
 
 test("calls child function with correct arguments", () => {
     const childFn = jest.fn(({ currentText }) => currentText)
-    const wrapper = mount(
+    mount(
         <Typewriting
             strings={["foo bar", "lorem ipsum"]}
         >
@@ -64,7 +64,7 @@ test("calls child function with correct arguments", () => {
 
 test("respects writeSpeedMs prop", () => {
     const childFn = jest.fn(({ currentText }) => currentText)
-    const wrapper = mount(
+    mount(
         <Typewriting
             writeSpeedMs={[100, 100]}
             strings={["foo bar"]}

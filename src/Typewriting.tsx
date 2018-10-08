@@ -17,7 +17,7 @@ const DEFAULTS = {
 
 interface Props {
     strings: string[]
-    waitBeforeDeleteMs?: TimeoutRange
+    waitBeforeDeleteMs?: number
     writeSpeedMs?: TimeoutRange
     deleteSpeedMs?: TimeoutRange
     children: ({ currentText }: { currentText: string }) => any
@@ -80,7 +80,7 @@ export class Typewriting extends React.PureComponent<Props, State> {
             tickType === Tick.START_DELETE ? waitBeforeDeleteMs != null ? waitBeforeDeleteMs : DEFAULTS.WAIT_BEFORE_DELETE_MS :
             0 // ¯\_(ツ)_/¯
 
-        this.tickTimeout = setTimeout(() => this.tick(), timeout)
+        this.tickTimeout = window.setTimeout(() => this.tick(), timeout)
     }
 
     private tick() {
