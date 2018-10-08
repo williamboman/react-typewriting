@@ -13,9 +13,14 @@ test("randomizes single timeout range above MINIMUM_THRESHOLD", () => {
 })
 
 test("randomizes timeout range number correctly", () => {
-    for (let min = 0, max = 100; min < 100, max < 200; ++min, ++max) {
+    let min = 0
+    let max = 100
+    let i = 0
+    while (i++ < 100) {
         const timeout = randomizeTimeout([min, max])
         expect(timeout).toBeGreaterThanOrEqual(min)
         expect(timeout).toBeLessThanOrEqual(max)
+        ++min
+        ++max
     }
 })
