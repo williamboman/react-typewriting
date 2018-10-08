@@ -17,7 +17,7 @@ const DEFAULTS = {
 
 interface Props {
     strings: string[]
-    waitBeforeDeleteMs?: TimeoutRange
+    waitBeforeDeleteMs?: number
     writeSpeedMs?: TimeoutRange
     deleteSpeedMs?: TimeoutRange
     children: ({ currentText }: { currentText: string }) => any
