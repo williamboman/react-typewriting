@@ -27,15 +27,17 @@
   "author": "William Boman <william@redwill.se>",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^23.3.2",
+    "@types/enzyme": "^3.1.14",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/jest": "^23.3.4",
     "@types/react": "15.6.19",
-    "enzyme": "^3.6.0",
-    "enzyme-adapter-react-16": "^1.5.0",
-    "jest": "^23.5.0",
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
-    "ts-jest": "^23.1.4",
-    "typescript": "3.0.1"
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "jest": "^23.6.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "ts-jest": "^23.10.4",
+    "typescript": "3.1.1"
   },
   "peerDependenies": {
     "react": ">=15"
