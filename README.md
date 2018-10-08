@@ -37,7 +37,7 @@ $ yarn add react-typewriting
 
 The strings to print out, in order of appearance.
 
-### `children` | `({ currentText }: { currentText }) => ReactNode` | *required*
+### `children` | `({ currentText: string }) => ReactNode` | *required*
 
 The child render prop.
 
@@ -46,7 +46,7 @@ The child render prop.
 Amount of milliseconds strings will be fully readable before starting
 to delete the string.
 
-### `writeSpeedMs` | `number` | `[number, number]` | default: 100
+### `writeSpeedMs` | `number` or `[number, number]` | default: 100
 
 This prop controls the speed at which the strings are built.
 
@@ -54,7 +54,7 @@ If provided a `number`, this number will be the longest time to wait between wri
 
 If provided a `[number, number]` tuple, a number between these two values will be the longest time to wait between writing characters.
 
-### `deleteSpeedMs` | `number` | `[number, number]`| default: 60
+### `deleteSpeedMs` | `number` or `[number, number]`| default: 60
 
 Same as `writeSpeedMs` (see above), but for when deleting characters.
 
