@@ -1,3 +1,7 @@
+## unreleased
+
+- Add `fullCurrentText` argument to the render prop function signature. `fullCurrentText` holds the full value of the current string.
+
 ## v2.1.1 (2018-09-09)
 
 - Exclude __tests__ directory from npm package.

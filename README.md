@@ -9,6 +9,7 @@ import { Typewriting } from 'react-typewriting'
 
 interface TypewritingRenderArgs {
     currentText: string
+    fullCurrentText: string
 }
 
 <Typewriting
@@ -17,8 +18,8 @@ interface TypewritingRenderArgs {
         'Receive 20% off on your first purchase!',
     ]}
 >
-    {({ currentText }: TypewritingRenderArgs) => (
-        <h1>{currentText}</h1>
+    {({ currentText, fullCurrentText }: TypewritingRenderArgs) => (
+        <h1 aria-label={fullCurrentText}>{currentText}</h1>
     )}
 </Typewriting>
 ```
@@ -37,9 +38,12 @@ $ yarn add react-typewriting
 
 The strings to print out, in order of appearance.
 
-### `children` | `({ currentText: string }) => ReactNode` | *required*
+### `children` | `({ currentText: string, fullCurrentText: string }) => ReactNode` | *required*
 
 The child render prop.
+
+- `currentText` holds the latest, sliced, version of the current string
+- `fullCurrentText` holds the full value of the current string
 
 ### `waitBeforeDeleteMs` | `number` | default: 9000
 
