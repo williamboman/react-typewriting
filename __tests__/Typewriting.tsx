@@ -6,20 +6,14 @@ jest.useFakeTimers()
 
 test("calls child function with correct arguments", () => {
     const childFn = jest.fn(({ currentText }) => currentText)
-    mount(
-        <Typewriting
-            strings={["foo bar", "lorem ipsum"]}
-        >
-            {childFn}
-        </Typewriting>
-    )
+    mount(<Typewriting strings={["foo bar", "lorem ipsum"]}>{childFn}</Typewriting>)
 
     let n = 0
     while (n++ < ["foo bar", "lorem ipsum"].join(" ").length * 2) {
         jest.runOnlyPendingTimers()
     }
 
-    expect(childFn.mock.calls).toEqual([
+    expect(childFn.mock.calls).toMatchObject([
         [{ currentText: "" }],
         [{ currentText: "f" }],
         [{ currentText: "fo" }],
@@ -65,16 +59,13 @@ test("calls child function with correct arguments", () => {
 test("respects writeSpeedMs prop", () => {
     const childFn = jest.fn(({ currentText }) => currentText)
     mount(
-        <Typewriting
-            writeSpeedMs={[100, 100]}
-            strings={["foo bar"]}
-        >
+        <Typewriting writeSpeedMs={[100, 100]} strings={["foo bar"]}>
             {childFn}
-        </Typewriting>
+        </Typewriting>,
     )
 
     jest.advanceTimersByTime(300)
-    expect(childFn.mock.calls).toEqual([
+    expect(childFn.mock.calls).toMatchObject([
         [{ currentText: "" }],
         [{ currentText: "f" }],
         [{ currentText: "fo" }],
@@ -82,7 +73,7 @@ test("respects writeSpeedMs prop", () => {
         [{ currentText: "foo " }],
     ])
     jest.advanceTimersByTime(300)
-    expect(childFn.mock.calls).toEqual([
+    expect(childFn.mock.calls).toMatchObject([
         [{ currentText: "" }],
         [{ currentText: "f" }],
         [{ currentText: "fo" }],
@@ -97,12 +88,9 @@ test("respects writeSpeedMs prop", () => {
 test("respects the deleteSpeedMs prop", () => {
     const childFn = jest.fn(({ currentText }) => currentText)
     const wrapper = mount(
-        <Typewriting
-            deleteSpeedMs={[100, 100]}
-            strings={["foo bar"]}
-        >
+        <Typewriting deleteSpeedMs={[100, 100]} strings={["foo bar"]}>
             {childFn}
-        </Typewriting>
+        </Typewriting>,
     )
 
     while (wrapper.find(Typewriting).text() !== "foo bar") {
@@ -112,7 +100,7 @@ test("respects the deleteSpeedMs prop", () => {
     jest.runOnlyPendingTimers()
 
     jest.advanceTimersByTime(300)
-    expect(childFn.mock.calls).toEqual([
+    expect(childFn.mock.calls).toMatchObject([
         [{ currentText: "" }],
         [{ currentText: "f" }],
         [{ currentText: "fo" }],
@@ -129,7 +117,7 @@ test("respects the deleteSpeedMs prop", () => {
     ])
 
     jest.advanceTimersByTime(300)
-    expect(childFn.mock.calls).toEqual([
+    expect(childFn.mock.calls).toMatchObject([
         [{ currentText: "" }],
         [{ currentText: "f" }],
         [{ currentText: "fo" }],
@@ -147,5 +135,30 @@ test("respects the deleteSpeedMs prop", () => {
         [{ currentText: "f" }],
         [{ currentText: "" }],
     ])
+})
 
+test("calls the render prop function with correct values", () => {
+    const childFn = jest.fn(val => null)
+    mount(
+        <Typewriting
+            waitBeforeDeleteMs={0}
+            deleteSpeedMs={[0, 0]}
+            writeSpeedMs={[100, 100]}
+            strings={["foo bar", "lorem ipsum"]}>
+            {childFn}
+        </Typewriting>,
+    )
+    expect(childFn.mock.calls[0]).toEqual([
+        {
+            currentText: "",
+            fullCurrentText: "foo bar",
+        },
+    ])
+    jest.advanceTimersByTime(700)
+    expect(childFn.mock.calls[16]).toEqual([
+        {
+            currentText: "",
+            fullCurrentText: "lorem ipsum",
+        },
+    ])
 })
