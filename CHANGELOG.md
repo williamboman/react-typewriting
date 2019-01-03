@@ -1,4 +1,4 @@
-## unreleased
+## v2.2.0 (2019-01-03)
 
 - Add `fullCurrentText` argument to the render prop function signature. `fullCurrentText` holds the full value of the current string.
 

@@ -1,63 +1,63 @@
 {
-  "name": "react-typewriting",
-  "version": "2.1.1",
-  "homepage": "https://github.com/williamboman/react-typewriting",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/williamboman/react-typewriting.git"
-  },
-  "description": "React component for creating highly customizable typewriting effects.",
-  "main": "lib/Typewriting.js",
-  "typings": "lib/Typewriting.d.ts",
-  "scripts": {
-    "build": "rm -rf lib/ && tsc --declaration --outDir lib",
-    "prepublish": "npm run build",
-    "jest": "jest",
-    "test": "npm run ts-lint && npm run jest",
-    "ts-lint": "tsc --noEmit"
-  },
-  "keywords": [
-    "react",
-    "component",
-    "typewriting",
-    "typewriter",
-    "animation",
-    "typescript"
-  ],
-  "author": "William Boman <william@redwill.se>",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/enzyme": "^3.1.14",
-    "@types/enzyme-adapter-react-16": "^1.0.3",
-    "@types/jest": "^23.3.4",
-    "@types/react": "15.6.19",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0",
-    "jest": "^23.6.0",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "ts-jest": "^23.10.4",
-    "typescript": "3.1.1"
-  },
-  "peerDependenies": {
-    "react": ">=15"
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>/__tests__"
-    ],
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
+    "name": "react-typewriting",
+    "version": "2.2.0",
+    "homepage": "https://github.com/williamboman/react-typewriting",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/williamboman/react-typewriting.git"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
+    "description": "React component for creating highly customizable typewriting effects.",
+    "main": "lib/Typewriting.js",
+    "typings": "lib/Typewriting.d.ts",
+    "scripts": {
+        "build": "rm -rf lib/ && tsc --declaration --outDir lib",
+        "prepublish": "npm run build",
+        "jest": "jest",
+        "test": "npm run ts-lint && npm run jest",
+        "ts-lint": "tsc --noEmit"
+    },
+    "keywords": [
+        "react",
+        "component",
+        "typewriting",
+        "typewriter",
+        "animation",
+        "typescript"
     ],
-    "setupTestFrameworkScriptFile": "<rootDir>/setup-jest.ts"
-  }
+    "author": "William Boman <william@redwill.se>",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/enzyme": "^3.1.14",
+        "@types/enzyme-adapter-react-16": "^1.0.3",
+        "@types/jest": "^23.3.4",
+        "@types/react": "15.6.19",
+        "enzyme": "^3.7.0",
+        "enzyme-adapter-react-16": "^1.6.0",
+        "jest": "^23.6.0",
+        "react": "^16.5.2",
+        "react-dom": "^16.5.2",
+        "ts-jest": "^23.10.4",
+        "typescript": "3.1.1"
+    },
+    "peerDependenies": {
+        "react": ">=15"
+    },
+    "jest": {
+        "roots": [
+            "<rootDir>/__tests__"
+        ],
+        "transform": {
+            "^.+\\.tsx?$": "ts-jest"
+        },
+        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js",
+            "jsx",
+            "json",
+            "node"
+        ],
+        "setupTestFrameworkScriptFile": "<rootDir>/setup-jest.ts"
+    }
 }
